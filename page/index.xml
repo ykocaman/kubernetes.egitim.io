@@ -5,10 +5,22 @@
     <link>http://kubernetesbyexample.com/page/</link>
     <description>Recent content in Pages on Kubernetes By Example</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Tue, 12 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://kubernetesbyexample.com/page/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>API Server access</title>
+      <link>http://kubernetesbyexample.com/api/</link>
+      <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://kubernetesbyexample.com/api/</guid>
+      <description>Sometimes it&amp;rsquo;s useful or necessary to directly access the Kubernetes API server, for exploratory or testing purposes.
+In order to do this, one option is to proxy the API to your local environment, using:
+$ kubectl proxy --port=8080 Starting to serve on 127.0.0.1:8080  Now you can query the API (in a separate terminal session) like so:
+$ curl http://localhost:8080/api/v1 { &amp;quot;kind&amp;quot;: &amp;quot;APIResourceList&amp;quot;, &amp;quot;groupVersion&amp;quot;: &amp;quot;v1&amp;quot;, &amp;quot;resources&amp;quot;: [ { ... { &amp;quot;name&amp;quot;: &amp;quot;services/status&amp;quot;, &amp;quot;singularName&amp;quot;: &amp;quot;&amp;quot;, &amp;quot;namespaced&amp;quot;: true, &amp;quot;kind&amp;quot;: &amp;quot;Service&amp;quot;, &amp;quot;verbs&amp;quot;: [ &amp;quot;get&amp;quot;, &amp;quot;patch&amp;quot;, &amp;quot;update&amp;quot; ] } ] }  Alternatively, without proxying, you can use kubectl directly as follows to achieve the same:</description>
+    </item>
     
     <item>
       <title>Port Forward</title>
