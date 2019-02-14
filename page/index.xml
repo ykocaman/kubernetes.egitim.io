@@ -5,10 +5,20 @@
     <link>http://kubernetesbyexample.com/page/</link>
     <description>Recent content in Pages on Kubernetes By Example</description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 14 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://kubernetesbyexample.com/page/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Persistent Volumes</title>
+      <link>http://kubernetesbyexample.com/pv/</link>
+      <pubDate>Thu, 14 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>http://kubernetesbyexample.com/pv/</guid>
+      <description>A persistent volume (PV) is a cluster-wide resource that you can use to store data in a way that it persists beyond the lifetime of a pod. The PV is not backed by some storage on a worker node but by some storage system such as EBS or NFS or a distributed filesystem like Ceph.
+In order to use a PV you need to claim it first, using a persistent volume claim (PVC).</description>
+    </item>
     
     <item>
       <title>API Server access</title>
