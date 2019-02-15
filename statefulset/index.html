@@ -5,15 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Kubernetes By Example</title>
-  <meta property="og:title" content="Kubernetes By Example" />
-  <meta name="twitter:title" content="Kubernetes By Example" />
-  <meta name="description" content="This is a hands-on introduction to Kubernetes. Browse the examples:
- pods labels replication controllers deployments services service discovery port forward health checks environment variables namespaces volumes persistent volumes secrets logging jobs stateful sets nodes API server  Want to try it out yourself? You can run all this on Red Hat&rsquo;s distribution of Kubernetes, OpenShift. Follow the instructions here for a local setup or sign up for openshift.com for an online environment.">
-  <meta property="og:description" content="This is a hands-on introduction to Kubernetes. Browse the examples:
- pods labels replication controllers deployments services service discovery port forward health checks environment variables namespaces volumes persistent volumes secrets logging jobs stateful sets nodes API server  Want to try it out yourself? You can run all this on Red Hat&rsquo;s distribution of Kubernetes, OpenShift. Follow the instructions here for a local setup or sign up for openshift.com for an online environment.">
-  <meta name="twitter:description" content="This is a hands-on introduction to Kubernetes. Browse the examples:
- pods labels replication controllers deployments services service discovery port forward health checks environment variables …">
+  <title>StatefulSet</title>
+  <meta property="og:title" content="StatefulSet" />
+  <meta name="twitter:title" content="StatefulSet" />
+  <meta name="description" content="Kubernetes statefulset by example">
+  <meta property="og:description" content="Kubernetes statefulset by example">
+  <meta name="twitter:description" content="Kubernetes statefulset by example">
   <meta name="author" content="Michael Hausenblas"/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
@@ -21,12 +18,12 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@mhausenblas" />
   <meta name="twitter:creator" content="@mhausenblas" />
-  <meta property="og:url" content="http://kubernetesbyexample.com/" />
+  <meta property="og:url" content="http://kubernetesbyexample.com/statefulset/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
 
   <meta name="generator" content="Hugo 0.51" />
-  <link rel="canonical" href="http://kubernetesbyexample.com/" />
+  <link rel="canonical" href="http://kubernetesbyexample.com/statefulset/" />
   <link rel="alternate" href="http://kubernetesbyexample.com/index.xml" type="application/rss+xml" title="Kubernetes By Example">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -107,11 +104,11 @@
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>Kubernetes By Example</h1>
+              <h1>StatefulSet</h1>
                 
                   
                     <hr class="small">
-                    <span class="page-subheading">Brought to you by the OpenShift team</span>
+                    <span class="page-subheading">Kubernetes statefulset by example</span>
                   
                 
                 
@@ -124,44 +121,49 @@
 
 
     
-  <div role="main" class="container">
+  <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        
-          <div class="well">
-            <p>This is a hands-on introduction to Kubernetes. Browse the examples:</p>
+        <p>If you have a stateless app you want to use a deployment. However, for a stateful app you might want to use a <a href="https://kubernetes.io/docs/concepts/workloads/controllers/statefulset/">StatefulSet</a>. Unlike a deployment, the <code>StatefulSet</code> provides certain guarantees about the identity of the pods it is managing (that is, predictable names) and about the startup order. Two more things that are different compared to a deployment: for network communication you need to create a <a href="https://kubernetes.io/docs/concepts/services-networking/service/#headless-services">headless services</a> and for persistency the <code>StatefulSet</code> manages a <a href="/pv">persistent volume</a> per pod.</p>
 
-<ul>
-<li><a href="/pods/">pods</a></li>
-<li><a href="/labels/">labels</a></li>
-<li><a href="/rcs/">replication controllers</a></li>
-<li><a href="/deployments/">deployments</a></li>
-<li><a href="/services/">services</a></li>
-<li><a href="/sd/">service discovery</a></li>
-<li><a href="/pf/">port forward</a></li>
-<li><a href="/healthz/">health checks</a></li>
-<li><a href="/envs/">environment variables</a></li>
-<li><a href="/ns/">namespaces</a></li>
-<li><a href="/volumes/">volumes</a></li>
-<li><a href="/pv/">persistent volumes</a></li>
-<li><a href="/secrets/">secrets</a></li>
-<li><a href="/logging/">logging</a></li>
-<li><a href="/jobs/">jobs</a></li>
-<li><a href="/statefulset/">stateful sets</a></li>
-<li><a href="/nodes/">nodes</a></li>
-<li><a href="/api/">API server</a></li>
-</ul>
+<p>In order to see how this all plays together, we will be using an <a href="https://blog.openshift.com/kubernetes-statefulset-in-action/">educational Kubernetes-native NoSQL datastore</a>.</p>
 
-<p>Want to try it out yourself? You can run all this on Red Hat&rsquo;s distribution of
-Kubernetes, OpenShift. Follow the instructions <a href="/diy/">here</a> for a local setup or sign up for <a href="https://openshift.com/">openshift.com</a> for an online environment.</p>
+<p>Let&rsquo;s start with creating the <a href="https://raw.githubusercontent.com/mhausenblas/mehdb/master/app.yaml">stateful app</a>, that is, the <code>StatefulSet</code> along with the persistent volumes and the headless service:</p>
 
-          </div>
-        
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/mhausenblas/mehdb/master/app.yaml
+</code></pre>
 
-        <div class="posts-list">
-          
-          
-        </div>
+<p>After a minute or so, you can have a look at all the resources that have been created:</p>
+
+<pre><code class="language-bash">$ kubectl get sts,po,pvc,svc
+NAME                     DESIRED   CURRENT   AGE
+statefulset.apps/mehdb   2         2         1m
+
+NAME          READY   STATUS    RESTARTS   AGE
+pod/mehdb-0   1/1     Running   0          1m
+pod/mehdb-1   1/1     Running   0          56s
+
+NAME                                 STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   AGE
+persistentvolumeclaim/data-mehdb-0   Bound    pvc-bc2d9b3b-310d-11e9-aeff-123713f594ec   1Gi        RWO            ebs            1m
+persistentvolumeclaim/data-mehdb-1   Bound    pvc-d4b7620f-310d-11e9-aeff-123713f594ec   1Gi        RWO            ebs            56s
+
+NAME            TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
+service/mehdb   ClusterIP   None         &lt;none&gt;        9876/TCP   1m
+</code></pre>
+
+<p>Now we can check if the stateful app is working properly. To do this, we use the <code>/status</code> endpoint of the headless service <code>mehdb:9876</code> and since we haven&rsquo;t put any data yet into the datastore, we&rsquo;d expect that <code>0</code> keys are reported:</p>
+
+<pre><code class="language-bash">$ kubectl run -it --rm jumpod --restart=Never --image=quay.io/mhausenblas/jump:0.2 -- curl mehdb:9876/status?level=full
+If you don't see a command prompt, try pressing enter.
+0
+pod &quot;jumpod&quot; deleted
+</code></pre>
+
+<p>And indeed we see <code>0</code> keys being available, reported above.</p>
+
+<p>Note that sometimes a <code>StatefulSet</code> is not the best fit for your stateful app. You might be better off defining a <a href="https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/">custom resource</a> along with writing a custom controller to have finer-grained control over your workload.</p>
+
+<p><a href="/jobs">Previous</a> | <a href="/nodes">Next</a></p>
 
         
       </div>
