@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes pods by example">
   <meta property="og:description" content="Kubernetes pods by example">
   <meta name="twitter:description" content="Kubernetes pods by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/pods/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -159,11 +157,11 @@ get rid of the pod you have to execute <code>kubectl delete deployment sise</cod
 <h4 id="using-configuration-file">Using configuration file</h4>
 
 <p>You can also create a pod from a configuration file.
-In this case the <a href="https://github.com/mhausenblas/kbe/blob/master/specs/pods/pod.yaml">pod</a> is
+In this case the <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/pods/pod.yaml">pod</a> is
 running the already known <code>simpleservice</code> image from above along with
 a generic <code>CentOS</code> container:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/pods/pod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/pods/pod.yaml
 
 $ kubectl get pods
 NAME                      READY     STATUS    RESTARTS   AGE
@@ -179,10 +177,10 @@ on localhost:</p>
 </code></pre>
 
 <p>Specify the <code>resources</code> field in the pod to influence how much CPU and/or RAM a
-container in a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/pods/constraint-pod.yaml">pod</a>
+container in a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/pods/constraint-pod.yaml">pod</a>
 can use (here: <code>64MB</code> of RAM and <code>0.5</code> CPUs):</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/pods/constraint-pod.yaml
+<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/pods/constraint-pod.yaml
 
 $ kubectl describe pod constraintpod
 ...
@@ -211,8 +209,7 @@ $ kubectl delete pod constraintpod
 <p>To sum up, launching one or more containers (together) in Kubernetes is simple,
 however doing it directly as shown above comes with a serious limitation: you have to
 manually take care of keeping them running in case of a failure. A better way
-to supervise pods is to use <a href="/rcs/">replication controllers</a>, or even better
-<a href="/deployments">deployments</a>, giving you much more control.</p>
+to supervise pods is to use <a href="/deployments">deployments</a>, giving you much more control over the life cycle, including rolling out a new version.</p>
 
 <p><a href="/labels">Next</a></p>
 
@@ -227,26 +224,10 @@ to supervise pods is to use <a href="/rcs/">replication controllers</a>, or even
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

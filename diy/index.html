@@ -11,13 +11,11 @@
   <meta name="description" content="Try out for yourself">
   <meta property="og:description" content="Try out for yourself">
   <meta name="twitter:description" content="Try out for yourself">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/diy/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -128,22 +126,24 @@
 I&rsquo;ve got locally running on my machine:</p>
 
 <ol>
-<li>Install <a href="https://docs.openshift.org/latest/minishift/getting-started/installing.html">Minishift</a></li>
+<li>Install <a href="https://docs.okd.io/latest/minishift/getting-started/installing.html">Minishift</a></li>
 <li>Run <code>minishift start</code></li>
 <li>Configure OpenShift Client binary (<code>oc</code>) by running <code>eval $(minishift oc-env)</code></li>
 <li>Log in using <code>oc login -u system:admin</code> with password <code>admin</code></li>
 <li>Create a symlink from <code>oc</code> like so:  <code>ln -s $(which oc) /usr/local/bin/kubectl</code></li>
 </ol>
 
-<p>All examples have been carried out with Minishift version <a href="https://github.com/minishift/minishift/releases/tag/v1.7.0">v1.7.0</a> and OpenShift Client Binary (<code>oc</code>) version <a href="https://github.com/openshift/origin/releases/tag/v3.6.0">v3.6.0</a> (i.e. Kubernetes <a href="https://github.com/kubernetes/kubernetes/releases/tag/v1.6.1">v1.6.1</a>)</p>
+<p>All examples have been carried out with Minishift version <a href="https://github.com/minishift/minishift/releases/tag/v1.32.0">v1.32.0</a>:</p>
 
 <pre><code class="language-bash">$ minishift version
-minishift v1.7.0+15491358
+minishift v1.32.0+009893b
 
-$ kubectl version
-Client Version: version.Info{Major:&quot;1&quot;, Minor:&quot;6&quot;, GitVersion:&quot;v1.6.1+5115d708d7&quot;, GitCommit:&quot;fff65cf&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2017-07-30T21:47:33Z&quot;, GoVersion:&quot;go1.7.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
-Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;6&quot;, GitVersion:&quot;v1.6.1+5115d708d7&quot;, GitCommit:&quot;fff65cf&quot;, GitTreeState:&quot;clean&quot;, BuildDate:&quot;2017-08-01T06:24:02Z&quot;, GoVersion:&quot;go1.7.6&quot;, Compiler:&quot;gc&quot;, Platform:&quot;linux/amd64&quot;}
+$ kubectl version --short
+Client Version: v1.12.2
+Server Version: v1.11.0+d4cacc0
 </code></pre>
+
+<p>Alternatively, you can try out the Developer Preview of <a href="https://try.openshift.com/">OpenShift 4</a> using the examples here.</p>
 
         
       </div>
@@ -156,26 +156,10 @@ Server Version: version.Info{Major:&quot;1&quot;, Minor:&quot;6&quot;, GitVersio
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

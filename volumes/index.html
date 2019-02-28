@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes volumes by example">
   <meta property="og:description" content="Kubernetes volumes by example">
   <meta name="twitter:description" content="Kubernetes volumes by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/volumes/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -125,9 +123,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <p>A Kubernetes volume is essentially a directory accessible to all containers
-running in a pod. In contrast to the container-local filesystem, the data in volumes is preserved across
-container restarts. The medium backing a volume and its contents are determined
-by the volume type:</p>
+running in a pod. In contrast to the container-local filesystem, the data in volumes is preserved across container restarts. The medium backing a volume and its contents are determined by the volume type:</p>
 
 <ul>
 <li>node-local types such as <code>emptyDir</code> or <code>hostPath</code></li>
@@ -139,10 +135,10 @@ by the volume type:</p>
 
 <p>A special type of volume is <code>PersistentVolume</code>, which we will cover elsewhere.</p>
 
-<p>Let&rsquo;s create a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/volumes/pod.yaml">pod</a>
+<p>Let&rsquo;s create a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/volumes/pod.yaml">pod</a>
 with two containers that use an <code>emptyDir</code> volume to exchange data:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/volumes/pod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/volumes/pod.yaml
 
 $ kubectl describe pod sharevol
 Name:                   sharevol
@@ -157,7 +153,7 @@ Volumes:
 <p>We first exec into one of the containers in the pod, <code>c1</code>, check the volume mount
 and generate some data:</p>
 
-<pre><code class="language-bash">$ kubectl exec sharevol -c c1 -i -t -- bash
+<pre><code class="language-bash">$ kubectl exec -it sharevol -c c1 -- bash
 [root@sharevol /]# mount | grep xchange
 /dev/sda1 on /tmp/xchange type ext4 (rw,relatime,data=ordered)
 [root@sharevol /]# echo 'some data' &gt; /tmp/xchange/data
@@ -167,7 +163,7 @@ and generate some data:</p>
 the volume mounted at <code>/tmp/data</code> and are able to read the data created in the
 previous step:</p>
 
-<pre><code class="language-bash">$ kubectl exec sharevol -c c2 -i -t -- bash
+<pre><code class="language-bash">$ kubectl exec -it sharevol -c c2 -- bash
 [root@sharevol /]# mount | grep /tmp/data
 /dev/sda1 on /tmp/data type ext4 (rw,relatime,data=ordered)
 [root@sharevol /]# cat /tmp/data/data
@@ -197,26 +193,10 @@ that for <code>emptyDir</code> you currently can not specify resource consumptio
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes health checks by example">
   <meta property="og:description" content="Kubernetes health checks by example">
   <meta name="twitter:description" content="Kubernetes health checks by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/healthz/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -126,19 +124,18 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <p>In order to verify if a container in a pod is healthy and ready to serve traffic,
 Kubernetes provides for a range of health checking mechanisms. Health checks,
-or probes as they are called in Kubernetes, are carried out
+or <strong>probes</strong> as they are called in Kubernetes, are carried out
 by the <a href="https://kubernetes.io/docs/admin/kubelet/">kubelet</a> to determine when to
-restart a container (for <code>livenessProbe</code>) and by <a href="/services/">services</a> to
-determine if a pod should receive traffic or not (for <code>readinessProbe</code>).</p>
+restart a container (for <code>livenessProbe</code>) and used by services and deployments to determine if a pod should receive traffic (for <code>readinessProbe</code>).</p>
 
 <p>We will focus on HTTP health checks in the following. Note that it is the responsibility
 of the application developer to expose a URL that the kubelet can
 use to determine if the container is healthy (and potentially ready).</p>
 
-<p>Let&rsquo;s create a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/healthz/pod.yaml">pod</a>
+<p>Let&rsquo;s create a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/healthz/pod.yaml">pod</a>
 that exposes an endpoint <code>/health</code>, responding with a HTTP <code>200</code> status code:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/healthz/pod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/healthz/pod.yaml
 </code></pre>
 
 <p>In the pod specification we&rsquo;ve defined the following:</p>
@@ -151,7 +148,7 @@ that exposes an endpoint <code>/health</code>, responding with a HTTP <code>200<
     port: 9876
 </code></pre>
 
-<p>Above means that Kubernetes will start checking <code>/health</code> endpoint in every 5 seconds after waiting 2 seconds for the first check.</p>
+<p>Above means that Kubernetes will start checking the <code>/health</code> endpoint, after initially waiting 2 seconds, every 5 seconds.</p>
 
 <p>If we now look at the pod we can see that it is considered healthy:</p>
 
@@ -174,11 +171,11 @@ already present on machine
   2s            2s              1       {kubelet 192.168.99.100}        spec.containers{sise}   Normal          Started         Started container with docker id 8a628578d6ad
 </code></pre>
 
-<p>Now we launch a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/healthz/badpod.yaml">bad pod</a>,
+<p>Now we launch a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/healthz/badpod.yaml">bad pod</a>,
 that is, a pod that has a container that randomly (in the time range 1 to 4 sec)
 does not return a 200 code:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/healthz/badpod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/healthz/badpod.yaml
 </code></pre>
 
 <p>Looking at the events of the bad pod, we can see that the health check failed:</p>
@@ -216,10 +213,10 @@ that loads some data from external storage such as S3 or a database that needs
 to initialize some tables. In this case you want to signal when the container is
 ready to serve traffic.</p>
 
-<p>Let&rsquo;s create a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/healthz/ready.yaml">pod</a>
+<p>Let&rsquo;s create a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/healthz/ready.yaml">pod</a>
 with a <code>readinessProbe</code> that kicks in after 10 seconds:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/healthz/ready.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/healthz/ready.yaml
 </code></pre>
 
 <p>Looking at the events of the pod, we can see that, eventually, the pod is ready
@@ -256,26 +253,10 @@ Conditions:                                                                     
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

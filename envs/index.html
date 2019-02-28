@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes environment variables by example">
   <meta property="og:description" content="Kubernetes environment variables by example">
   <meta name="twitter:description" content="Kubernetes environment variables by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/envs/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -128,10 +126,10 @@
 addition, Kubernetes exposes certain runtime infos via environment variables
 automatically.</p>
 
-<p>Let&rsquo;s launch a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/envs/pod.yaml">pod</a>
+<p>Let&rsquo;s launch a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/envs/pod.yaml">pod</a>
 that we pass an environment variable <code>SIMPLE_SERVICE_VERSION</code> with the value <code>1.0</code>:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/envs/pod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/envs/pod.yaml
 
 $ kubectl describe pod envs | grep IP:
 IP:                     172.17.0.3
@@ -144,8 +142,7 @@ has picked up the environment variable <code>SIMPLE_SERVICE_VERSION</code>:</p>
 {&quot;host&quot;: &quot;172.17.0.3:9876&quot;, &quot;version&quot;: &quot;1.0&quot;, &quot;from&quot;: &quot;172.17.0.1&quot;}
 </code></pre>
 
-<p>And indeed it has picked up the user-provided environment variable (the default,
-response would be <code>&quot;version&quot;: &quot;0.5.0&quot;</code>).</p>
+<p>And indeed it has picked up the user-provided environment variable since the default response would be <code>&quot;version&quot;: &quot;0.5.0&quot;</code>.</p>
 
 <p>You can check what environment variables Kubernetes itself provides automatically
 (from within the cluster, using a dedicated endpoint that the <a href="https://github.com/mhausenblas/simpleservice">app</a>
@@ -192,26 +189,10 @@ the <a href="https://kubernetes.io/docs/user-guide/downward-api/">downward API</
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

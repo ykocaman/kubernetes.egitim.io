@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes logging by example">
   <meta property="og:description" content="Kubernetes logging by example">
   <meta name="twitter:description" content="Kubernetes logging by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/logging/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -130,10 +128,10 @@ container produces available, which is a good use case for debugging. More advan
 <a href="http://some.ops4devs.info/logging/">setups</a> consider logs across nodes and store
 them in a central place, either within the cluster or via a dedicated (cloud-based) service.</p>
 
-<p>Let&rsquo;s create a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/logging/pod.yaml">pod</a>
+<p>Let&rsquo;s create a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/logging/pod.yaml">pod</a>
 called <code>logme</code> that runs a container writing to <code>stdout</code> and <code>stderr</code>:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/logging/pod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/logging/pod.yaml
 </code></pre>
 
 <p>To view the five most recent log lines of the <code>gen</code> container in the <code>logme</code> pod,
@@ -162,11 +160,11 @@ Thu Apr 27 11:43:13 UTC 2017
 would have gotten all log lines from the start of the container.</p>
 
 <p>You can also view logs of pods that have already completed their lifecycle.
-For this we create a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/logging/oneshotpod.yaml">pod</a>
+For this we create a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/logging/oneshotpod.yaml">pod</a>
 called <code>oneshot</code> that counts down from 9 to 1 and then exits. Using the <code>-p</code> option
 you can print the logs for previous instances of the container in a pod:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/logging/oneshotpod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/logging/oneshotpod.yaml
 $ kubectl logs -p oneshot -c gen
 9
 8
@@ -197,26 +195,10 @@ $ kubectl logs -p oneshot -c gen
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes labels by example">
   <meta property="og:description" content="Kubernetes labels by example">
   <meta name="twitter:description" content="Kubernetes labels by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/labels/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -131,9 +129,9 @@ So you&rsquo;re free to choose labels as you see fit, for example, to express
 environments such as &lsquo;this pod is running in production&rsquo; or ownership,
 like &lsquo;department X owns that pod&rsquo;.</p>
 
-<p>Let&rsquo;s create a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/labels/pod.yaml">pod</a> that initially has one label (<code>env=development</code>):</p>
+<p>Let&rsquo;s create a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/labels/pod.yaml">pod</a> that initially has one label (<code>env=development</code>):</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/labels/pod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/labels/pod.yaml
 
 $ kubectl get pods --show-labels
 NAME       READY     STATUS    RESTARTS   AGE    LABELS
@@ -169,10 +167,10 @@ labelex   1/1       Running   0          27m
 </code></pre>
 
 <p>Oftentimes, Kubernetes objects also support set-based selectors.
-Let&rsquo;s launch <a href="https://github.com/mhausenblas/kbe/blob/master/specs/labels/anotherpod.yaml">another pod</a>
+Let&rsquo;s launch <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/labels/anotherpod.yaml">another pod</a>
 that has two labels (<code>env=production</code> and <code>owner=michael</code>):</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/labels/anotherpod.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/labels/anotherpod.yaml
 </code></pre>
 
 <p>Now, let&rsquo;s list all pods that are either labelled with <code>env=development</code> or with
@@ -192,7 +190,7 @@ remove both of these pods with:</p>
 
 <p>Beware that this will destroy any pods with those labels.</p>
 
-<p>You can also delete them normally with:</p>
+<p>You can also delete them directly, via their names, with:</p>
 
 <pre><code class="language-bash">$ kubectl delete pods labelex
 
@@ -202,7 +200,7 @@ $ kubectl delete pods labelexother
 <p>Note that labels are not restricted to pods. In fact you can apply them to
 all sorts of objects, such as nodes or services.</p>
 
-<p><a href="/pods">Previous</a> | <a href="/rcs">Next</a></p>
+<p><a href="/pods">Previous</a> | <a href="/deployments">Next</a></p>
 
         
       </div>
@@ -215,26 +213,10 @@ all sorts of objects, such as nodes or services.</p>
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

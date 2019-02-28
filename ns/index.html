@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes namespaces by example">
   <meta property="og:description" content="Kubernetes namespaces by example">
   <meta name="twitter:description" content="Kubernetes namespaces by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/ns/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -124,14 +122,12 @@
   <div class="container" role="main">
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <p>Namespaces provide for a scope of Kubernetes objects. You can think of it
-as a workspace you&rsquo;re sharing with other users. Many objects such as pods and
-services are namespaced, while some (like nodes) are not. As a developer you&rsquo;d
-usually simply use an assigned namespace, however admins may wish to manage them,
-for example to set up access control or resource quotas.</p>
+        <p>Namespaces provide for a scope of Kubernetes resource, carving up your cluster in smaller units. You can think of it
+as a workspace you&rsquo;re sharing with other users. Many resources such as pods and
+services are namespaced, while some, for example, nodes are not namespaced (but cluster-wide). As a developer you&rsquo;d usually use an assigned namespace, however admins may wish to manage them, for example to set up access control or resource quotas.</p>
 
 <p>Let&rsquo;s list all namespaces (note that the output will depend on the environment
-you&rsquo;re using, I&rsquo;m using <a href="/diy/">Minishift</a>):</p>
+you&rsquo;re using, I&rsquo;m using <a href="/diy/">Minishift</a> here):</p>
 
 <pre><code class="language-bash">$ kubectl get ns
 NAME              STATUS    AGE
@@ -154,10 +150,10 @@ No resource quota.
 No resource limits.
 </code></pre>
 
-<p>Let&rsquo;s now create a new <a href="https://github.com/mhausenblas/kbe/blob/master/specs/ns/ns.yaml">namespace</a>
+<p>Let&rsquo;s now create a new <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/ns/ns.yaml">namespace</a>
 called <code>test</code> now:</p>
 
-<pre><code class="language-bash">$ kubectl create -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/ns/ns.yaml
+<pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/ns/ns.yaml
 namespace &quot;test&quot; created
 
 $ kubectl get ns
@@ -170,16 +166,18 @@ openshift-infra   Active    13d
 test              Active    3s
 </code></pre>
 
-<p>To launch a <a href="https://github.com/mhausenblas/kbe/blob/master/specs/ns/pod.yaml">pod</a> in
+<p>Alternatively, we can could have created the namespace using the <code>kubectl create namespace test</code> command.</p>
+
+<p>To launch a <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/ns/pod.yaml">pod</a> in
 the newly created namespace <code>test</code>, do:</p>
 
-<pre><code class="language-bash">$ kubectl create --namespace=test -f https://raw.githubusercontent.com/mhausenblas/kbe/master/specs/ns/pod.yaml
+<pre><code class="language-bash">$ kubectl apply --namespace=test -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/ns/pod.yaml
 </code></pre>
 
 <p>Note that using above method the namespace becomes a runtime property, that is,
-you can easily deploy the same pod or service, or RC, etc. into multiple
-namespaces (for example: <code>dev</code> and <code>prod</code>). If you however prefer to hard-code the
-namespace, you can define it directly in the <code>metadata</code> like so:</p>
+you can deploy the same pod or service, etc. into multiple
+namespaces (for example: <code>dev</code> and <code>prod</code>). Hard-coding the
+namespace directly in the <code>metadata</code> section like shown in the following is possible but causes less flexibility when deploying your apps:</p>
 
 <pre><code>apiVersion: v1
 kind: Pod
@@ -188,7 +186,7 @@ metadata:
   namespace: test
 </code></pre>
 
-<p>To list namespaced objects such as our pod <code>podintest</code>, run following command as:</p>
+<p>To list namespaced objects such as our pod <code>podintest</code>, run the following command:</p>
 
 <pre><code class="language-bash">$ kubectl get pods --namespace=test
 NAME        READY     STATUS    RESTARTS   AGE
@@ -216,26 +214,10 @@ for more info how to handle namespaces.</p>
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 

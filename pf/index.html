@@ -11,13 +11,11 @@
   <meta name="description" content="Kubernetes port forward by example">
   <meta property="og:description" content="Kubernetes port forward by example">
   <meta name="twitter:description" content="Kubernetes port forward by example">
-  <meta name="author" content="Michael Hausenblas"/>
+  <meta name="author" content=""/>
   <link href='http://kubernetesbyexample.com/img/kbe-logo.ico' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:image" content="http://kubernetesbyexample.com/img/kbe-logo.png" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:site" content="@mhausenblas" />
-  <meta name="twitter:creator" content="@mhausenblas" />
   <meta property="og:url" content="http://kubernetesbyexample.com/pf/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Kubernetes By Example" />
@@ -126,7 +124,7 @@
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <p>In the context of developing apps on Kubernetes it is often useful to quickly access a service from your local environment without exposing it using, for example, a load balancer or an ingress resource. In this case you can use <a href="https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/">port forwarding</a>.</p>
 
-<p>Let&rsquo;s create an <a href="https://github.com/mhausenblas/kbe/blob/master/specs/pf/app.yaml">app</a> consisting of a deployment and a service called <code>simpleservice</code>, serving on port <code>80</code>:</p>
+<p>Let&rsquo;s create an <a href="https://github.com/openshift-evangelists/kbe/blob/master/specs/pf/app.yaml">app</a> consisting of a deployment and a service called <code>simpleservice</code>, serving on port <code>80</code>:</p>
 
 <pre><code class="language-bash">$ kubectl apply -f https://raw.githubusercontent.com/openshift-evangelists/kbe/master/specs/pf/app.yaml
 </code></pre>
@@ -161,26 +159,10 @@ Forwarding from [::1]:8080 -&gt; 9876
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <ul class="list-inline text-center footer-links">
           
-              <li>
-                <a href="https://github.com/mhausenblas" title="GitHub">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
-              <li>
-                <a href="https://twitter.com/mhausenblas" title="Twitter">
-                  <span class="fa-stack fa-lg">
-                    <i class="fa fa-circle fa-stack-2x"></i>
-                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                  </span>
-                </a>
-              </li>
           
         </ul>
         <p class="credits copyright text-muted">
-          Michael Hausenblas
+          
           &nbsp;&bull;&nbsp;
           2019
 
