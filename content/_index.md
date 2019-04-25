@@ -1,24 +1,22 @@
-This is a hands-on introduction to Kubernetes. Browse the examples:
+Kubernetes dünyasına hızlıca bir giriş yapmak şu konulara göz atabilirsiniz:
 
-- [pods](/pods/)
-- [labels](/labels/)
-- [deployments](/deployments/)
-- [services](/services/)
-- [service discovery](/sd/)
-- [port forward](/pf/)
-- [health checks](/healthz/)
-- [environment variables](/envs/)
-- [namespaces](/ns/)
-- [volumes](/volumes/)
-- [persistent volumes](/pv/)
-- [secrets](/secrets/)
-- [logging](/logging/)
-- [jobs](/jobs/)
+- [taşıyıcılar - pods](/pods/)
+- [etiketler - labels](/labels/)
+- [dağıtım - deployments](/deployments/)
+- [servisler - services](/services/)
+- [servis tanıma - service discovery](/sd/)
+- [port yönlendirme - port forward](/pf/)
+- [sağlık kontrolü - health checks](/healthz/)
+- [ortam değişkenleri - environment variables](/envs/)
+- [etki alanları - namespaces](/ns/)
+- [depolama - volumes](/volumes/)
+- [kalıcı depolama - persistent volumes](/pv/)
+- [hassas bilgiler - secrets](/secrets/)
+- [işlem kayıtları - logging](/logging/)
+- [zamanlanmış görevler - jobs](/jobs/)
 - [stateful sets](/statefulset/)
-- [init containers](/ic/)
-- [nodes](/nodes/)
-- [API server](/api/)
+- [kurucu paketler - init containers](/ic/)
+- [düğümler - nodes](/nodes/)
+- [programlama arayüzü - API server](/api/)
 
-
-Want to try it out yourself? You can run all this on Red Hat's distribution of
-Kubernetes, OpenShift. Follow the instructions [here](/diy/) for a local setup or sign up for [openshift.com](https://openshift.com/) for an online environment.
+Bu site, OpenShift tarafından http://kubernetesbyexample.com adresinde yayınlanan İngilizce içeriklerin Türkçe çevirisidir.
